@@ -1,0 +1,60 @@
+# ABOUTME: Regina's release settings, published as the template revision's deploy_defaults.
+# ABOUTME: Fields follow Core's ManagedAgentTemplateDeployDefaults; unknown fields are refused.
+owner_connection: mail_and_files
+hires_per_employer: many
+mode: cron
+cron_schedule: "0 7 * * *"
+model_policy: balanced
+max_runtime_seconds: 3600
+browser:
+  display: headed
+  max_session_seconds: 1800
+network_egress:
+  - { host: mcpservers.org, port: 443, protocol: tcp }
+  - { host: mcp.so, port: 443, protocol: tcp }
+  - { host: glama.ai, port: 443, protocol: tcp }
+  - { host: smithery.ai, port: 443, protocol: tcp }
+  - { host: cursor.directory, port: 443, protocol: tcp }
+  - { host: mcpmarket.com, port: 443, protocol: tcp }
+  - { host: mcpcatalog.dev, port: 443, protocol: tcp }
+  - { host: challenges.cloudflare.com, port: 443, protocol: tcp }
+script_publisher_grants:
+  # Her records
+  - { publisher_slug: seren-db, method: POST, path: /databases, require_approval: false }
+  - { publisher_slug: seren-db, method: POST, path: /query, require_approval: false }
+  # Finding and reading directories
+  - { publisher_slug: exa, method: POST, path: /search, require_approval: false }
+  - { publisher_slug: firecrawl, method: POST, path: /v2/search, require_approval: false }
+  - { publisher_slug: firecrawl, method: POST, path: /v2/scrape, require_approval: false }
+  # Sandbox
+  - { publisher_slug: daytona, method: POST, path: /sandbox, require_approval: false }
+  - { publisher_slug: daytona, method: GET, path: "/sandbox/{sandboxId}", require_approval: false }
+  - { publisher_slug: daytona, method: DELETE, path: "/sandbox/{sandboxId}", require_approval: false }
+  - { publisher_slug: daytona, method: POST, path: "/sandbox/{sandboxId}/code/run", require_approval: false }
+  - { publisher_slug: daytona, method: GET, path: "/sandbox/{sandboxId}/files/download", require_approval: false }
+  - { publisher_slug: daytona, method: POST, path: "/sandbox/{sandboxId}/process/session", require_approval: false }
+  - { publisher_slug: daytona, method: POST, path: "/sandbox/{sandboxId}/process/session/{sessionId}/exec", require_approval: false }
+  - { publisher_slug: daytona, method: GET, path: "/sandbox/{sandboxId}/process/session/{sessionId}/command/{commandId}/logs", require_approval: false }
+  # GitHub: reading
+  - { publisher_slug: github-api, method: GET, path: /user, require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}", require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}/branches/{branch}", require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}/commits", require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}/releases", require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}/pulls/{pull_number}", require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}/pulls/{pull_number}/reviews", require_approval: false }
+  - { publisher_slug: github-api, method: GET, path: "/repos/{owner}/{repo}/issues/{issue_number}/comments", require_approval: false }
+  # GitHub: submitting. The fork grant needs seren-core#2604 live.
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/forks", require_approval: false }
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/git/blobs", require_approval: false }
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/git/trees", require_approval: false }
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/git/commits", require_approval: false }
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/git/refs", require_approval: false }
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/pulls", require_approval: false }
+  - { publisher_slug: github-api, method: POST, path: "/repos/{owner}/{repo}/issues/{issue_number}/comments", require_approval: false }
+  # Mail: reading answers, and sending only messages the hirer approves
+  - { publisher_slug: gmail, method: GET, path: /messages, require_approval: false }
+  - { publisher_slug: gmail, method: GET, path: "/messages/{message_id}", require_approval: false }
+  - { publisher_slug: gmail, method: POST, path: /messages/send, require_approval: true }
+  - { publisher_slug: microsoft-outlook, method: GET, path: /me/messages, require_approval: false }
+  - { publisher_slug: microsoft-outlook, method: POST, path: /me/sendMail, require_approval: true }

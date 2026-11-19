@@ -1,0 +1,20 @@
+# ABOUTME: Declares Regina's runtime, the publishers her scripts may call, and her browser.
+# ABOUTME: Core admits a script grant only for a publisher declared here.
+skill: template
+description: Regina Listwell, Internet Marketing Specialist
+runtime:
+  language: python
+  mode: cron
+connectors:
+  records: { kind: seren_publisher, publisher: seren-db }
+  search: { kind: seren_publisher, publisher: exa }
+  pages: { kind: seren_publisher, publisher: firecrawl }
+  sandbox: { kind: seren_publisher, publisher: daytona }
+  github: { kind: seren_publisher, publisher: github-api }
+  gmail: { kind: seren_publisher, publisher: gmail }
+  outlook: { kind: seren_publisher, publisher: microsoft-outlook }
+  browser:
+    kind: seren_managed_browser
+    profile: full
+    access: read_write
+    display: headed
