@@ -13,6 +13,8 @@ connectors:
   github: { kind: seren_publisher, publisher: github-api }
   gmail: { kind: seren_publisher, publisher: gmail }
   outlook: { kind: seren_publisher, publisher: microsoft-outlook }
+  drive: { kind: seren_publisher, publisher: google-drive }
+  onedrive: { kind: seren_publisher, publisher: microsoft-onedrive }
   browser:
     kind: seren_managed_browser
     profile: full

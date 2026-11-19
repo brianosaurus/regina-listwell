@@ -58,3 +58,8 @@ script_publisher_grants:
   - { publisher_slug: gmail, method: POST, path: /messages/send, require_approval: true }
   - { publisher_slug: microsoft-outlook, method: GET, path: /me/messages, require_approval: false }
   - { publisher_slug: microsoft-outlook, method: POST, path: /me/sendMail, require_approval: true }
+  # Files: read-only, required alongside mail by owner_connection mail_and_files
+  - { publisher_slug: google-drive, method: GET, path: /drive/v3/files, require_approval: false }
+  - { publisher_slug: google-drive, method: GET, path: "/drive/v3/files/{fileId}", require_approval: false }
+  - { publisher_slug: microsoft-onedrive, method: GET, path: /me/drive/root/children, require_approval: false }
+  - { publisher_slug: microsoft-onedrive, method: GET, path: "/me/drive/items/{itemId}/content", require_approval: false }
